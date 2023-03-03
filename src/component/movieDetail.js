@@ -36,6 +36,8 @@ const MovieDetail = () => {
       .finally(() => setLoading(false))
   }, [id])
 
+  console.log(detailMovies)
+
   const video = videoMovie.filter((videoMovie) => videoMovie.type === "Trailer")
   console.log(video, "data")
 
@@ -58,7 +60,7 @@ const MovieDetail = () => {
                   className="poster-detail"
                 />
                 <div className="desc-movie">
-                  <h2>{detailMovies.original_title}</h2>
+                  <h2>{detailMovies.title}</h2>
                   <div className="d-flex flex-column">
                     <div className="d-flex me-2">
                       {detailMovies.genres ? (
@@ -98,6 +100,7 @@ const MovieDetail = () => {
           </div>
         </>
       )}
+
       {loading ? (
         <>
           <Loaders />{" "}
