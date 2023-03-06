@@ -9,6 +9,7 @@ const MovieDetail = () => {
   const [detailMovies, setDetailMovies] = useState([])
   const [videoMovie, setVideoMovie] = useState([])
   const [loading, setLoading] = useState(false)
+  const [cast, SetCast] = useState([])
 
   const { id } = useParams()
   useEffect(() => {
@@ -36,12 +37,20 @@ const MovieDetail = () => {
       .finally(() => setLoading(false))
   }, [id])
 
-  console.log(detailMovies)
-
+  useEffect(() => {
+    setLoading(true)
+    axios({
+      method: "GET",
+      url: `${process.env.REACT_APP_BASEURL}/movie/${id}/credits?api_key=${process.env.REACT_APP_APIKEY}`,
+    })
+      .then((result) => SetCast(result.data.cast))
+      .catch((err) => console.log(err))
+      .finally(() => setLoading(false))
+  }, [id])
   const video = videoMovie.filter((videoMovie) => videoMovie.type === "Trailer")
-  console.log(video, "data")
-
-  // console.log(detailMovies)
+  // console.log(video, "data")
+  const topCast = cast.slice(0, 6)
+  console.log(topCast)
 
   return (
     <>
@@ -101,6 +110,30 @@ const MovieDetail = () => {
         </>
       )}
 
+      <div className="container mb-5">
+        <h1 className="ps-sm-5 ">Top Billed Cast</h1>
+        <div className=" pt-3 ps-sm-5 card-container container d-flex gap-3 flex-wrap ">
+          {topCast.map((el, i) => {
+            return (
+              <div className="img-cast p-2 ">
+                <img
+                  src={
+                    el.profile_path === null
+                      ? "https://feb.kuleuven.be/drc/LEER/visiting-scholars-1/image-not-available.jpg/image"
+                      : `${process.env.REACT_APP_BASEIMGURL}/${el.profile_path}`
+                  }
+                  alt="photo_cast"
+                  className="w-100 w-ms-50 h-75 "
+                />
+                <div className="mt-1">
+                  <h5 className=" text-break text-wrap">{el.original_name}</h5>
+                  <p className="mb-1">{el.character}</p>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </div>
       {loading ? (
         <>
           <Loaders />{" "}

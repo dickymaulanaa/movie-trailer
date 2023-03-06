@@ -43,7 +43,7 @@ function App() {
   // let { detailId } = useParams()
 
   return (
-    <div className="container-fluid px-0">
+    <div className="container-fluid px-0 all-container">
       <Navbar expand="lg" className="navbar-custom-color " variant="dark">
         <Container fluid className="px-0">
           <Navbar.Brand href="/" className="ps-3">
@@ -99,7 +99,9 @@ function App() {
           <Route path="*" element={<h1 className="text-center text-danger">404 NOT FOUND</h1>} />
         </Routes>
       </div>
-      <footer className=" align-items-center d-flex justify-content-center">MOVIE TRAILER</footer>
+      <footer className=" align-items-center d-flex justify-content-center stick-bottom">
+        MOVIE TRAILER
+      </footer>
     </div>
   )
 }

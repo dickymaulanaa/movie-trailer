@@ -11,6 +11,8 @@ footer {
   background-color: #282c34;
   color: antiquewhite;
 }
+.all-container {
+}
 .App {
 }
 .navlink {
@@ -118,7 +120,21 @@ footer {
   color: #f5e12a;
   font-size: 50px;
 }
+.img-cast {
+  width: 185px;
+  background-color: white;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+}
 
+@media screen and (max-width: 1024px) {
+  .img-cast {
+    width: 150px;
+  }
+}
 /* .movie-search {
   font-weight: bold;
   height: 48px;
