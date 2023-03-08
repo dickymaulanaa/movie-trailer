@@ -64,7 +64,12 @@ const MovieDetail = () => {
             <div>
               <div className="container p-sm-5 d-flex flex-wrap flex-md-nowrap  " style={{ gap: "30px" }}>
                 <img
-                  src={`${process.env.REACT_APP_BASEIMGURL}/${detailMovies.poster_path}`}
+                  // src={`${process.env.REACT_APP_BASEIMGURL}/${detailMovies.poster_path}`}
+                  src={
+                    detailMovies.poster_path === null
+                      ? "https://feb.kuleuven.be/drc/LEER/visiting-scholars-1/image-not-available.jpg/image"
+                      : `${process.env.REACT_APP_BASEIMGURL}/${detailMovies.poster_path}`
+                  }
                   alt="1"
                   className="poster-detail"
                 />

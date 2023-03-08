@@ -89,7 +89,11 @@ const ComingSoon = () => {
                     onClick={() => navigate(`/detail/${el.id}`)}
                   >
                     <img
-                      src={`${process.env.REACT_APP_BASEIMGURL}/${el.poster_path}`}
+                      src={
+                        el.poster_path === null
+                          ? "https://feb.kuleuven.be/drc/LEER/visiting-scholars-1/image-not-available.jpg/image"
+                          : `${process.env.REACT_APP_BASEIMGURL}/${el.poster_path}`
+                      }
                       alt=""
                       className="movie-img"
                     />

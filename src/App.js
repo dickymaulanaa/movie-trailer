@@ -7,6 +7,7 @@ import ComingSoonMovie from "./component/movieSoon"
 import { useState } from "react"
 import axios from "axios"
 import MovieDetail from "./component/movieDetail"
+import TopRatedMovie from "./component/topRatedMovie"
 
 function App() {
   const baseUrl = process.env.REACT_APP_BASEURL
@@ -27,6 +28,7 @@ function App() {
     if (input.length >= 0) {
       axios({
         method: "GET",
+
         url: `${baseUrl}/search/movie?query=${input}&page=1&api_key=${apiKey}`,
       })
         .then((result) => setDataSearch(result.data.results))
@@ -56,7 +58,7 @@ function App() {
             className="py-3 px-3 text-start"
           >
             <Nav className="me-auto my-lg-0 mb-3 navlink " style={{ maxHeight: "150px" }} navbarScroll>
-              <Link to="/">Popular</Link>
+              <Link to="/top-rated-movie">Top Movie</Link>
               <Link to="/coming-soon">Coming Soon</Link>
             </Nav>
 
@@ -87,7 +89,9 @@ function App() {
         <Routes>
           <Route path="/" element={<MovieList />} />
           <Route path="/coming-soon" element={<ComingSoonMovie />} />
-          <Route path="/detail/:id" element={<MovieDetail />} />
+          <Route path="/top-rated-movie" element={<TopRatedMovie />} />
+          <Route path="/detail/:id" element={<MovieDetail />} />{" "}
+          <Route path="/page/:id" element={<MovieList />} />
           <Route
             path="/search"
             element={

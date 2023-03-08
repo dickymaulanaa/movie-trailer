@@ -33,11 +33,17 @@ const MovieList = () => {
 
   const nextPage = () => {
     SetPage((prevPage) => prevPage + 1)
+    navigate(`/page/${page + 1}`)
   }
   const prevPage = () => {
     SetPage((prevPage) => prevPage - 1)
+    if (page === 2) {
+      navigate("/")
+    } else {
+      navigate(`/page/${page - 1}`)
+    }
   }
-  console.log(totalPage)
+  // console.log(totalPage)
 
   return (
     <>
