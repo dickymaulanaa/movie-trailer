@@ -68,6 +68,13 @@ const ComingSoon = () => {
               >
                 Korea
               </button>
+              <button
+                className="btn btn-outline-danger btn-country"
+                value="TR"
+                onClick={(e) => handleCountry(e, "value")}
+              >
+                Thailand
+              </button>
             </Stack>
           </div>
         </div>
