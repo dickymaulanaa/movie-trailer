@@ -12,45 +12,86 @@ const MovieDetail = () => {
   const [cast, SetCast] = useState([])
 
   const { id } = useParams()
+
+  // useEffect(() => {
+  //   setLoading(true)
+  //   const baseUrl = process.env.REACT_APP_BASEURL
+  //   const apiKey = process.env.REACT_APP_APIKEY
+
+  //   axios({
+  //     method: "GET",
+  //     url: `${baseUrl}/movie/${id}?api_key=${apiKey}`,
+  //   })
+  //     .then((result) => setDetailMovies(result.data))
+  //     .catch((err) => console.log(err))
+  //     .finally(() => setLoading(false))
+  // }, [id])
+
+  // useEffect(() => {
+  //   setLoading(true)
+  //   axios({
+  //     method: "GET",
+  //     url: `${process.env.REACT_APP_BASEURL}/movie/${id}/videos?api_key=${process.env.REACT_APP_APIKEY}`,
+  //   })
+  //     .then((result) => setVideoMovie(result.data.results))
+  //     .catch((err) => console.log(err))
+  //     .finally(() => setLoading(false))
+  // }, [id])
+
+  // useEffect(() => {
+  //   setLoading(true)
+  //   axios({
+  //     method: "GET",
+  //     url: `${process.env.REACT_APP_BASEURL}/movie/${id}/credits?api_key=${process.env.REACT_APP_APIKEY}`,
+  //   })
+  //     .then((result) => SetCast(result.data.cast))
+  //     .catch((err) => console.log(err))
+  //     .finally(() => setLoading(false))
+  // }, [id])
+
   useEffect(() => {
     setLoading(true)
     const baseUrl = process.env.REACT_APP_BASEURL
     const apiKey = process.env.REACT_APP_APIKEY
 
-    axios({
-      method: "GET",
-      url: `${baseUrl}/movie/${id}?api_key=${apiKey}`,
-    })
-      .then((result) => setDetailMovies(result.data))
-      .catch((err) => console.log(err))
-      .finally(() => setLoading(false))
+    const getMovie = () => {
+      axios({
+        method: "GET",
+        url: `${baseUrl}/movie/${id}?api_key=${apiKey}`,
+      })
+        .then((result) => setDetailMovies(result.data))
+        .catch((err) => console.log(err))
+        .finally(() => setLoading(false))
+    }
+
+    const getVideo = () => {
+      axios({
+        method: "GET",
+        url: `${process.env.REACT_APP_BASEURL}/movie/${id}/videos?api_key=${process.env.REACT_APP_APIKEY}`,
+      })
+        .then((result) => setVideoMovie(result.data.results))
+        .catch((err) => console.log(err))
+        .finally(() => setLoading(false))
+    }
+
+    const getCast = () => {
+      axios({
+        method: "GET",
+        url: `${process.env.REACT_APP_BASEURL}/movie/${id}/credits?api_key=${process.env.REACT_APP_APIKEY}`,
+      })
+        .then((result) => SetCast(result.data.cast))
+        .catch((err) => console.log(err))
+        .finally(() => setLoading(false))
+    }
+
+    getMovie()
+    getCast()
+    getVideo()
   }, [id])
 
-  useEffect(() => {
-    setLoading(true)
-    axios({
-      method: "GET",
-      url: `${process.env.REACT_APP_BASEURL}/movie/${id}/videos?api_key=${process.env.REACT_APP_APIKEY}`,
-    })
-      .then((result) => setVideoMovie(result.data.results))
-      .catch((err) => console.log(err))
-      .finally(() => setLoading(false))
-  }, [id])
-
-  useEffect(() => {
-    setLoading(true)
-    axios({
-      method: "GET",
-      url: `${process.env.REACT_APP_BASEURL}/movie/${id}/credits?api_key=${process.env.REACT_APP_APIKEY}`,
-    })
-      .then((result) => SetCast(result.data.cast))
-      .catch((err) => console.log(err))
-      .finally(() => setLoading(false))
-  }, [id])
   const video = videoMovie.filter((videoMovie) => videoMovie.type === "Trailer")
-  // console.log(video, "data")
   const topCast = cast.slice(0, 6)
-  console.log(topCast)
+  // console.log(topCast)
 
   return (
     <>
@@ -120,7 +161,7 @@ const MovieDetail = () => {
         <div className=" pt-3 ps-sm-5 card-container container d-flex gap-3 flex-wrap ">
           {topCast.map((el, i) => {
             return (
-              <div className="img-cast p-2 ">
+              <div className="img-cast p-2 " key={i}>
                 <img
                   src={
                     el.profile_path === null
