@@ -28,7 +28,6 @@ function App() {
     if (input.length >= 0) {
       axios({
         method: "GET",
-
         url: `${baseUrl}/search/movie?query=${input}&page=1&api_key=${apiKey}`,
       })
         .then((result) => setDataSearch(result.data.results))
@@ -38,8 +37,6 @@ function App() {
       return alert("kurang")
     }
     navigate("/search")
-    // setInput("")
-    // console.log(input)
   }
 
   // let { detailId } = useParams()
